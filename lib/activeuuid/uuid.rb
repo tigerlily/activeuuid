@@ -60,7 +60,7 @@ module Arel
     end
 
     class MySQL < Arel::Visitors::ToSql
-      def visit_UUIDTools_UUID(o)
+      def visit_UUIDTools_UUID(o, _)
         o.quoted_id
       end
     end
@@ -114,7 +114,7 @@ module ActiveUUID
         EOS
       end
 
-      def instantiate_with_uuid(record)
+      def instantiate_with_uuid(record, _)
         uuid_columns.each do |uuid_column|
           record[uuid_column] = UUIDTools::UUID.serialize(record[uuid_column]).to_s if record[uuid_column]
         end
